@@ -4,12 +4,12 @@ import path from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  // Changed from '/skycast/' to '/skycast-weather/' to match your repo name
   base: "/skycast-weather/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "."),
+      // Typically, @ points to the "src" folder for better organization
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   server: {
