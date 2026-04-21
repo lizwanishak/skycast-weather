@@ -4,14 +4,15 @@ import path from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  // Ensure the repo name is exact and has both slashes
   base: "/skycast-weather/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"), // Standardize to the src folder
     },
   },
-  server: {
-    hmr: process.env.DISABLE_HMR !== "true",
+  build: {
+    outDir: "dist", // Explicitly tell Vite where to put the build
   },
 });
