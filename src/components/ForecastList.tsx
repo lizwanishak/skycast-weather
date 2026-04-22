@@ -1,20 +1,25 @@
-import React from 'react';
-import { getWeatherConfig, type WeatherData } from '../api/weatherApi';
-import { motion } from 'motion/react';
+import React from "react";
+import { getWeatherConfig, type WeatherData } from "../api/weatherApi";
+import { motion } from "motion/react";
 
 interface ForecastListProps {
-  daily: WeatherData['daily'];
+  daily: WeatherData["daily"];
 }
 
 export default function ForecastList({ daily }: ForecastListProps) {
   return (
-    <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6 backdrop-blur-xl h-full flex flex-col gap-4">
-      <h3 className="text-lg font-bold px-2">7-Day Forecast</h3>
-      <div className="flex-1 flex flex-col gap-2 overflow-hidden">
+    <div className="bg-white/5 border border-white/10 rounded-4xl p-4 md:p-5 backdrop-blur-xl flex flex-col gap-3">
+      <h3 className="text-sm font-bold px-2 uppercase tracking-widest text-slate-400">
+        7-Day Forecast
+      </h3>
+      <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
         {daily.time.map((date, i) => {
           const config = getWeatherConfig(daily.weather_code[i]);
           const dateObj = new Date(date);
-          const dayName = i === 0 ? 'Today' : dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+          const dayName =
+            i === 0
+              ? "Today"
+              : dateObj.toLocaleDateString("en-US", { weekday: "short" });
           const Icon = config.icon;
 
           return (
@@ -23,26 +28,28 @@ export default function ForecastList({ daily }: ForecastListProps) {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05 }}
-              className={`flex items-center justify-between p-4 transition-all duration-300 ${
-                i === 0 
-                  ? 'bg-blue-500/10 border border-blue-500/20 rounded-2xl' 
-                  : 'hover:bg-white/5 rounded-2xl border border-transparent'
+              className={`flex flex-col items-center w-full p-3 md:p-4 transition-all duration-300 gap-3 ${
+                i === 0
+                  ? "bg-blue-500/10 border border-blue-500/20 rounded-2xl"
+                  : "hover:bg-white/5 rounded-2xl border border-transparent"
               }`}
             >
-              <span className={`w-12 font-bold ${i === 0 ? 'text-blue-400' : 'text-slate-400 font-medium'}`}>
+              <span
+                className={`font-bold text-sm ${i === 0 ? "text-blue-400" : "text-slate-400"}`}
+              >
                 {dayName}
               </span>
 
-              <div className="flex items-center gap-3 flex-1 px-4">
-                <Icon className={`w-5 h-5 ${i === 0 ? 'text-blue-300' : config.color}`} strokeWidth={2} />
-                <span className="text-xs text-slate-400 truncate max-w-[80px]">
-                  {config.label}
-                </span>
-              </div>
+              <Icon
+                className={`w-8 h-8 ${i === 0 ? "text-blue-300" : config.color}`}
+                strokeWidth={1.5}
+              />
 
-              <div className="flex gap-3 text-sm font-bold w-20 justify-end">
+              <div className="flex flex-col items-center text-sm font-bold">
                 <span>{Math.round(daily.temperature_2m_max[i])}°</span>
-                <span className="text-slate-500">{Math.round(daily.temperature_2m_min[i])}°</span>
+                <span className="text-slate-500">
+                  {Math.round(daily.temperature_2m_min[i])}°
+                </span>
               </div>
             </motion.div>
           );
