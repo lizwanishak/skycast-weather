@@ -16,3 +16,5 @@ A modern, fast weather application with real-time forecasts and an intuitive sea
 3. Run the app: `npm run dev`
 
 Open your browser and start checking the weather!
+
+A basic vibe coding test project using both Google Gemini Code Assist and Github Copilot
