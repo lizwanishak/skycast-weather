@@ -1,18 +1,8 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
 import ForecastList from "./components/ForecastList";
-import StatsGrid from "./components/StatsGrid";
+import WeatherMap from "./components/WeatherMap";
 import {
   fetchWeather,
   type WeatherData,
@@ -83,14 +73,14 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-slate-100 selection:bg-blue-500/30">
+    <div className="h-screen text-slate-100 selection:bg-blue-500/30 overflow-hidden">
       {/* Background Glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/20 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-8 md:py-12 relative z-10 flex flex-col gap-8 min-h-screen">
+      <div className="max-w-6xl mx-auto px-6 py-4 md:py-6 relative z-10 flex flex-col gap-4 md:gap-6 h-full">
         {/* Header Section */}
         <header className="flex flex-col sm:flex-row items-center justify-between gap-6 shrink-0">
           <div className="flex items-center gap-3">
@@ -131,7 +121,7 @@ export default function App() {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1">
+        <main className="flex-1 min-h-0">
           <AnimatePresence mode="wait">
             {isLoading && !weather ? (
               <motion.div
@@ -172,25 +162,33 @@ export default function App() {
                 key="weather"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+                className="flex flex-col gap-6 h-full"
               >
-                <div className="lg:col-span-8 flex flex-col gap-6">
-                  <WeatherCard
-                    location={location}
-                    current={weather.current}
-                    low={weather.daily.temperature_2m_min[0]}
-                    high={weather.daily.temperature_2m_max[0]}
-                  />
-                  <StatsGrid
-                    apparent_temperature={weather.current.apparent_temperature}
-                    relative_humidity_2m={weather.current.relative_humidity_2m}
-                    wind_speed_10m={weather.current.wind_speed_10m}
-                  />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-0">
+                  <div className="lg:col-span-8 h-full">
+                    <WeatherCard
+                      location={location}
+                      current={weather.current}
+                      low={weather.daily.temperature_2m_min[0]}
+                      high={weather.daily.temperature_2m_max[0]}
+                      apparent_temperature={
+                        weather.current.apparent_temperature
+                      }
+                      relative_humidity_2m={
+                        weather.current.relative_humidity_2m
+                      }
+                      wind_speed_10m={weather.current.wind_speed_10m}
+                    />
+                  </div>
+                  <div className="lg:col-span-4 h-full">
+                    <WeatherMap
+                      latitude={location.latitude}
+                      longitude={location.longitude}
+                      city={location.name}
+                    />
+                  </div>
                 </div>
-
-                <div className="lg:col-span-4">
-                  <ForecastList daily={weather.daily} />
-                </div>
+                <ForecastList daily={weather.daily} />
               </motion.div>
             ) : (
               <motion.div
@@ -215,7 +213,7 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <footer className="shrink-0 pt-8 pb-8 text-center">
+        <footer className="shrink-0 py-2 text-center">
           <p className="text-slate-600 text-[10px] font-bold uppercase tracking-[0.2em]">
             Powered by Open-Meteo • 15min Cache Enabled
           </p>

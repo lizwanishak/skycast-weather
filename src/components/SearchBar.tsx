@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Search, MapPin, Loader2 } from 'lucide-react';
-import { searchLocations, type GeocodingResult } from '../api/weatherApi';
-import { cn } from '../lib/utils';
+import React, { useState, useEffect, useRef } from "react";
+import { Search, MapPin, Loader2 } from "lucide-react";
+import { searchLocations, type GeocodingResult } from "../api/weatherApi";
 
 interface SearchBarProps {
   onSelect: (location: GeocodingResult) => void;
 }
 
 export default function SearchBar({ onSelect }: SearchBarProps) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<GeocodingResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -23,7 +22,7 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
     }
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    
+
     setIsSearching(true);
     timeoutRef.current = setTimeout(async () => {
       const data = await searchLocations(query);
@@ -40,12 +39,15 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
   // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -64,7 +66,9 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
           placeholder="Search global cities..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => query.length >= 2 && results.length > 0 && setIsOpen(true)}
+          onFocus={() =>
+            query.length >= 2 && results.length > 0 && setIsOpen(true)
+          }
         />
       </div>
 
@@ -76,7 +80,7 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
               onClick={() => {
                 onSelect(res);
                 setIsOpen(false);
-                setQuery('');
+                setQuery("");
               }}
               className="w-full text-left px-5 py-4 hover:bg-white/5 border-b border-white/5 last:border-0 flex items-center gap-4 transition-colors group"
             >
@@ -86,7 +90,7 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
               <div className="flex flex-col">
                 <span className="font-bold text-slate-100">{res.name}</span>
                 <span className="text-xs text-slate-500">
-                  {[res.admin1, res.country].filter(Boolean).join(', ')}
+                  {[res.admin1, res.country].filter(Boolean).join(", ")}
                 </span>
               </div>
               <span className="ml-auto text-[10px] font-bold text-slate-600 bg-white/5 px-2 py-0.5 rounded-lg border border-white/5 uppercase">
