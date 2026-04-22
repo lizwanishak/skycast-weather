@@ -1,16 +1,10 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# LightSky Weather
 
-# Skycast Weather
+A modern, fast weather application with real-time forecasts and an intuitive search experience.
 
-This contains everything you need to run your app locally.
+## Getting Started
 
-## Run Locally
+1. Install dependencies: `npm install`
+2. Run the app: `npm run dev`
 
-**Prerequisites:** Node.js
-
-1. Install dependencies:
-   `npm install`
-2. Run the app:
-   `npm run dev`
+Open your browser and start checking the weather!

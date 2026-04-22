@@ -98,7 +98,7 @@ export default function App() {
               <Cloud className="w-6 h-6 text-slate-900" strokeWidth={2.5} />
             </div>
             <h1 className="text-2xl font-bold tracking-tight bg-linear-to-r from-white to-slate-400 bg-clip-text text-transparent">
-              SkyCast
+              LightSky
             </h1>
           </div>
 
@@ -203,7 +203,7 @@ export default function App() {
                   <Cloud className="w-10 h-10 text-slate-500" />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-300">
-                  Ready for SkyCast?
+                  Ready for LightSky?
                 </h2>
                 <p className="text-slate-500 mt-2 max-w-xs">
                   Search for your city above to get your personalized weather

@@ -1,4 +1,4 @@
-const CACHE_KEY_PREFIX = "skycast_cache_";
+const CACHE_KEY_PREFIX = "lightsky_cache_";
 const CACHE_EXPIRY = 15 * 60 * 1000; // 15 minutes
 
 export const getCachedData = <T>(key: string): T | null => {
@@ -27,10 +27,10 @@ export const setCachedData = (key: string, data: any): void => {
 };
 
 export const saveLastLocation = (location: any): void => {
-  localStorage.setItem('skycast_last_loc', JSON.stringify(location));
+  localStorage.setItem("lightsky_last_loc", JSON.stringify(location));
 };
 
 export const getLastLocation = (): any | null => {
-  const last = localStorage.getItem('skycast_last_loc');
+  const last = localStorage.getItem("lightsky_last_loc");
   return last ? JSON.parse(last) : null;
 };

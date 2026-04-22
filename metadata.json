@@ -1,5 +1,5 @@
 {
-  "name": "SkyCast Weather",
+  "name": "LightSky Weather",
   "description": "A modern, search-first weather application featuring high-precision forecasts, 7-day outlooks, and localized search powered by Open-Meteo.",
   "requestFramePermissions": [],
   "majorCapabilities": []
