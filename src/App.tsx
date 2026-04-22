@@ -73,7 +73,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen text-slate-100 selection:bg-blue-500/30 overflow-hidden">
+    <div className="min-h-screen text-slate-100 selection:bg-blue-500/30">
       {/* Background Glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/20 rounded-full blur-[120px]" />
@@ -121,7 +121,7 @@ export default function App() {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 min-h-0">
+        <main className="flex-1">
           <AnimatePresence mode="wait">
             {isLoading && !weather ? (
               <motion.div
@@ -164,8 +164,8 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 className="flex flex-col gap-6 h-full"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-0">
-                  <div className="lg:col-span-8 h-full">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:flex-1">
+                  <div className="lg:col-span-8">
                     <WeatherCard
                       location={location}
                       current={weather.current}
@@ -180,7 +180,7 @@ export default function App() {
                       wind_speed_10m={weather.current.wind_speed_10m}
                     />
                   </div>
-                  <div className="lg:col-span-4 h-full">
+                  <div className="lg:col-span-4 h-75 lg:h-full min-h-75">
                     <WeatherMap
                       latitude={location.latitude}
                       longitude={location.longitude}
